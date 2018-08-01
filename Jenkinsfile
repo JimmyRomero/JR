@@ -15,12 +15,7 @@ pipeline {
             steps {
                 echo 'Testing..'
 		sh './quickstart/gradlew clean test -p quickstart/'
-            }
-			post {
-        	always {
-           	   junit 'quickstart/build/test-results/test/*.xml'
-        	}
-		  }
+            }			
         }
 	 
         stage('Deploy') {
@@ -28,6 +23,12 @@ pipeline {
                 echo 'Deploying....'
 		sh './quickstart/gradlew clean build -p quickstart/'
             }
+        }
+    }
+	post {
+        always {
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            junit 'build/reports/**/*.xml'
         }
     }
 }
