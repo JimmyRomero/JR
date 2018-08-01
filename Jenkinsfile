@@ -20,6 +20,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+		sh './quickstart/gradlew clean build -p quickstart/'
             }
         }
     }
