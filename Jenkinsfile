@@ -17,6 +17,12 @@ pipeline {
 		sh './quickstart/gradlew clean test -p quickstart/'
             }			
         }
+	 
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'		
+            }
+        }
     }
 	post {
         always {            
@@ -25,3 +31,4 @@ pipeline {
         }
     }
 }
+
