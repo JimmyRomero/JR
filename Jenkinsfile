@@ -5,16 +5,16 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-		sh '''
-		chmod +x quickstart/gradlew
-		./quickstart/gradlew clean assemble -p quickstart/
-		'''
+				sh '''
+				chmod +x quickstart/gradlew
+				./quickstart/gradlew clean assemble -p quickstart/
+				'''
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-		sh './gradle/quickstart/gradlew test jacocoTestReport -p gradle/quickstart/'
+				sh './quickstart/gradlew test jacocoTestReport -p gradle/quickstart/'
             }			
         }	 
     }
