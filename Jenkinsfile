@@ -16,7 +16,13 @@ pipeline {
                 echo 'Testing..'
 		sh './quickstart/gradlew clean test -p quickstart/'
             }
+			post {
+        	always {
+           	   junit 'quickstart/build/test-results/test/*.xml'
+        	}
+		  }
         }
+	 
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
