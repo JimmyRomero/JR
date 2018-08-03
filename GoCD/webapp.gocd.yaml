@@ -6,7 +6,7 @@ pipelines:
     material:
       repo:
         git: https://github.com/devops-at06/JR.git
-        master: gocd
+        branch: master
     stages:
       - Build:
           jobs:
