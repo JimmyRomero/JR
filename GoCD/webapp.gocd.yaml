@@ -1,0 +1,45 @@
+format_version: 3
+pipelines:
+  lock_behavior: lockOnFailure
+  jr-quickstart-ci:  
+    group: TEST
+    material:
+      repo:
+        git: https://github.com/devops-at06/JR.git
+        master: gocd
+    stages:
+      - Build:
+          jobs:
+            building: 
+              tasks:
+                - exec:
+                    command: ./webappdemo/gradlew
+                    arguments:
+                      - "clean"
+                      - "assemble"
+                      - "-p"
+                      - "quickstart"
+              artifacts:
+                - build:
+                    source: quickstart/build/libs/*.jar
+                    destination: war
+      - Test:
+          jobs:
+            Unit_Test:
+              tasks:
+                - exec:
+                    command: ./quickstart/gradlew
+                    arguments:
+                      - clean
+                      - tests
+                      - -p
+                      - quickstart
+                artifacts:
+                  - build:
+                      source: quickstart/build/reports/tests/test/**/*
+                      destination: html
+                  - test:
+                      source: quickstart/build/test-results/test/*.xml
+                      destination: xml
+                tabs:
+                  unit_test: html/index.html 
