@@ -14,5 +14,5 @@ services:
       - GO_SERVER_URL=https://gocd_server:8154/go
     volumes:
       - /home/ubuntu/docker/godata_agent:/godata
-      - /home/ubuntu/docker/go_agent:/home/go 
+      - /home/ubuntu/docker/go_agent:/home/go
       
