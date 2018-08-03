@@ -1,45 +1,46 @@
 format_version: 3
-pipelines:
-  lock_behavior: lockOnFailure
-  jr-quickstart-ci:  
+pipelines:  
+  jr-java-quickstart:
+    lock_behavior: lockOnFailure
     group: TEST
-    material:
+    materials:
       repo:
         git: https://github.com/devops-at06/JR.git
-        master: gocd
+        branch: master
     stages:
       - Build:
           jobs:
-            building: 
+            building:
               tasks:
                 - exec:
-                    command: ./webappdemo/gradlew
+                    command: ./quickstart/gradlew
                     arguments:
                       - "clean"
                       - "assemble"
                       - "-p"
-                      - "quickstart"
+                      - "quickstart/"
               artifacts:
                 - build:
                     source: quickstart/build/libs/*.jar
-                    destination: war
+                    destination: Build
       - Test:
           jobs:
             Unit_Test:
               tasks:
                 - exec:
                     command: ./quickstart/gradlew
-                    arguments:
+                    arguments: 
                       - clean
                       - test
                       - -p
-                      - quickstart
-                artifacts:
-                  - build:
-                      source: quickstart/build/reports/tests/test/**/*
-                      destination: html
-                  - test:
-                      source: quickstart/build/test-results/test/*.xml
-                      destination: xml
-                tabs:
-                  unit_test: html/index.html 
+                      - quickstart/                      
+              artifacts:
+                - build:
+                    source: quickstart/build/reports/tests/test/**/*
+                    destination: html
+                - test:
+                    source: quickstart/build/test-results/test/*.xml
+                    destination: xml                    
+              tabs:
+                unit_test: html/index.html
+                
