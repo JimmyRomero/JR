@@ -31,7 +31,7 @@ pipelines:
                     command: ./quickstart/gradlew
                     arguments:
                       - clean
-                      - tests
+                      - test
                       - -p
                       - quickstart
                 artifacts:
