@@ -5,8 +5,8 @@ pipelines:
     group: TEST
     materials:
       repo:
-        git: https://github.com/devops-at06/JR.git
-        branch: master
+        git: https://github.com/JimmyRomero/JR.git
+        branch: task7_fixed
     stages:
       - Build:
           jobs:
