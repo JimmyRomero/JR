@@ -17,6 +17,12 @@ pipeline {
                 sh'./quickstart/gradlew test -p quickstart/'
             }
         }
+        stage('CodeQuality') {
+            steps {
+                echo 'Code Quality..'
+                sh'./quickstart/gradlew sonarqube -p quickstart/'
+            }
+        }        
     }
     post {
 		always {

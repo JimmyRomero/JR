@@ -7,4 +7,9 @@ services:
      - "5000:5000"
     volumes:
      - ./jenkins:/var/jenkins_home
-     
+  sonarqube:
+    image: "registry.fundacion-jala.local/devops/sonarqube:6.7.4-alpine"
+    ports:
+    - "9000:9000"
+    - "9092:9092"
+    
