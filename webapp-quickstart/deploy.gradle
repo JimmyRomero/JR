@@ -6,7 +6,7 @@ remotes {
   webServer {
     host = '10.28.109.116'
     user = 'ubuntu'
-    identity = file('C:\\Users\\Administrator\\key\\jindevops.pem')
+    identity = file(System.properties['key.path'])
   }
 }
 
@@ -14,7 +14,7 @@ task deploy {
   doLast {
     ssh.run {
       session(remotes.webServer) {        
-        put from: 'build/libs/webapp-quickstart.war', into: '/opt/tomcat'
+        put from: 'build/libs/webapp-quickstart.war', into: '/opt/tomcat/webapps'
       }
     }
   }
