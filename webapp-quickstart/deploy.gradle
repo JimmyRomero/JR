@@ -1,0 +1,21 @@
+plugins {
+  id 'org.hidetake.ssh' version '2.9.0'
+}
+
+remotes {
+  webServer {
+    host = '10.28.109.116'
+    user = 'ubuntu'
+    identity = file('C:\\Users\\Administrator\\key\\jindevops.pem')
+  }
+}
+
+task deploy {
+  doLast {
+    ssh.run {
+      session(remotes.webServer) {        
+        put from: 'build/libs/webapp-quickstart.war', into: '/opt/tomcat'
+      }
+    }
+  }
+}

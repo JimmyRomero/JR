@@ -1,5 +1,4 @@
 /.gradle/
-/.vagrant/
 /build/
 /out/
 *.iml
