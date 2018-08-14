@@ -61,8 +61,6 @@ pipelines:
       repo:
         git: https://github.com/JimmyRomero/JR.git
         branch: task13
-        whitelist:
-          - webapp-quickstart/**/*
     stages:
       - Commit:
           jobs:
