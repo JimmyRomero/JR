@@ -72,9 +72,7 @@ pipelines:
                     command: ./webapp-quickstart/gradlew
                     arguments:
                       - "clean"
-                      - "assemble"
-                      - "-p"
-                      - "webapp-quickstart"
+                      - "assemble"                      
               artifacts:
                 - build:
                     source: webapp-quickstart/build/libs/war
