@@ -75,7 +75,7 @@ pipelines:
                       - "webapp-quickstart"
               artifacts:
                 - build:
-                    source: webapp-quickstart/build/libs/war
+                    source: webapp-quickstart/build/libs/*.war
                     destination: war
       - Test:
           jobs:
