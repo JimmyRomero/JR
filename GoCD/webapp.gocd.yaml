@@ -60,7 +60,7 @@ pipelines:
     materials:
       repo:
         git: https://github.com/JimmyRomero/JR.git
-        branch: practice_deploy3
+        branch: task13
         whitelist:
           - webapp-quickstart/**/*
     stages:
