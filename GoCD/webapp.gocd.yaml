@@ -85,7 +85,7 @@ pipelines:
                     command: ./webapp-quickstart/gradlew
                     arguments:
                       - -b
-                      - -webapp-quickstart/deploy.gradle
+                      - deploy.gradle
                       - deploy
                       - Pdev_server=10.28.109.116
                       - -p
