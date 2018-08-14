@@ -43,14 +43,26 @@ pipelines:
                     destination: xml                    
               tabs:
                 unit_test: html/index.html
-     
-  jr-java-quickstart:
+      - Code_Quality:
+          jobs:
+            Sonarqube:
+              tasks:
+                - exec:
+                    command: ./quickstart/gradlew
+                    arguments:
+                      - sonarqube
+                      - -p
+                      - quickstart
+
+  jr-java-webapp-quickstart-build:
     lock_behavior: lockOnFailure
     group: Application
     materials:
       repo:
-        git: https://github.com/devops-at06/JR.git
-        branch: master
+        git: https://github.com/JimmyRomero/JR.git
+        branch: practice_deploy3
+        whitelist:
+          - webapp-quickstart/**/*
     stages:
       - Commit:
           jobs:
