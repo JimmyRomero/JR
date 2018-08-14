@@ -4,18 +4,28 @@ plugins {
 
 remotes {
   webServer {
-    host = '10.28.109.116'
-    user = 'ubuntu'
-    identity = file(System.properties['key.path'])
+    host = dev_server
+    user = user_server
+    identity = file(key_path)
   }
 }
 
 task deploy {
   doLast {
     ssh.run {
-      session(remotes.webServer) {        
-        put from: 'build/libs/webapp-quickstart.war', into: '/opt/tomcat/webapps'
-        execute 'sudo service tomcat restart'
+      session(remotes.webServer) {
+        execute 'echo Stopping Tomcat service...'
+        execute 'sudo systemctl stop tomcat'
+        execute "sudo rm -f ${tomcat_webapps}/${war_name}.war", ignoreError: true
+        execute "sudo rm -rf ${tomcat_webapps}/${war_name}", ignoreError: true
+
+        execute 'echo Sending war file...'
+        put from: "${war_path}/${war_name}.war", into: "/tmp/${war_name}.war"
+        execute "sudo cp -f /tmp/${war_name}.war ${tomcat_webapps}/${war_name}.war", ignoreError: true
+        remove "/tmp/${war_name}.war"
+
+        execute 'echo Starting Tomcat service...'
+        execute 'sudo systemctl start tomcat'
       }
     }
   }
