@@ -59,10 +59,8 @@ pipelines:
     group: Application
     materials:
       repo:
-        git: https://github.com/JimmyRomero/JR.git
-        branch: practice_deploy3
-        whitelist:
-          - webapp-quickstart/**/*
+        git: https://github.com/devops-at06/JR.git
+        branch: master
     stages:
       - Commit:
           jobs:
@@ -77,38 +75,24 @@ pipelines:
                       - "webapp-quickstart"
               artifacts:
                 - build:
-                    source: webapp-quickstart/build/libs/war
+                    source: webapp-quickstart/build/libs/*.war
                     destination: war
-      - Test:
-          jobs:
-            Unit_Test:
-              tasks:
-                - exec:
-                    command: ./webapp-quickstart/gradlew
-                    arguments:                       
-                      - tests
-                      - -p
-                      - webapp-quickstart                      
-              artifacts:
-                - build:
-                    source: webapp-quickstart/build/reports/tests/test/**/*
-                    destination: html
-                - test:
-                    source: webapp-quickstart/build/test-results/test/*.xml
-                    destination: xml                    
-              tabs:
-                unit_test: html/index.html
       - Deploy:
           jobs:
             Application:
               tasks:
+                - fetch:                    
+                    stage: Commit
+                    job: building
+                    source: war/
                 - exec:
                     command: ./webapp-quickstart/gradlew
                     arguments:
                       - -b
-                      - -webapp-quickstart/deploy.gradle
+                      - deploy.gradle
                       - deploy
-                      - Pdev_server=10.28.109.116
+                      - -Pdev_server=10.28.109.116
+                      - -Pwar_path=war
                       - -p
                       - webapp-quickstart
                       
