@@ -77,6 +77,36 @@ pipelines:
                 - build:
                     source: webapp-quickstart/build/libs/*.war
                     destination: war
+      - Test:
+          jobs:
+            Unit_Test:
+              tasks:
+                - exec:
+                    command: ./webapp-quickstart/gradlew
+                    arguments: 
+                      - clean
+                      - test
+                      - -p
+                      - webapp-quickstart                 
+              artifacts:
+                - build:
+                    source: webapp-quickstart/build/reports/tests/test/**/*
+                    destination: html
+                - test:
+                    source: webapp-quickstart/build/test-results/test/*.xml
+                    destination: xml                    
+              tabs:
+                unit_test: html/index.html
+      - Code_Quality:
+          jobs:
+            Sonarqube:
+              tasks:
+                - exec:
+                    command: ./webapp-quickstart/gradlew
+                    arguments:
+                      - sonarqube
+                      - -p
+                      - webapp-quickstart
       - Deploy:
           jobs:
             Application:
