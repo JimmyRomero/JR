@@ -59,8 +59,8 @@ pipelines:
     group: Application
     materials:
       repo:
-        git: https://github.com/JimmyRomero/JR.git
-        branch: task13
+        git: https://github.com/devops-at06/JR.git
+        branch: master
     stages:
       - Commit:
           jobs:
