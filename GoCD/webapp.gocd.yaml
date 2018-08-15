@@ -81,6 +81,10 @@ pipelines:
           jobs:
             Application:
               tasks:
+                - fetch:                    
+                    stage: Commit
+                    job: building
+                    source: war/
                 - exec:
                     command: ./webapp-quickstart/gradlew
                     arguments:
@@ -88,6 +92,7 @@ pipelines:
                       - deploy.gradle
                       - deploy
                       - -Pdev_server=10.28.109.116
+                      - -Pwar_path=war
                       - -p
                       - webapp-quickstart
                       
