@@ -85,7 +85,7 @@ pipelines:
                     command: ./webapp-quickstart/gradlew
                     arguments: 
                       - clean
-                      - tests
+                      - test
                       - -p
                       - webapp-quickstart                 
               artifacts:
