@@ -97,6 +97,16 @@ pipelines:
                     destination: xml                    
               tabs:
                 unit_test: html/index.html
+      - Code_Quality:
+          jobs:
+            Sonarqube:
+              tasks:
+                - exec:
+                    command: ./webapp-quickstart/gradlew
+                    arguments:
+                      - sonarqube
+                      - -p
+                      - webapp-quickstart
       - Deploy:
           jobs:
             Application:
