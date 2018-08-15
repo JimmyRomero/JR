@@ -1,6 +1,7 @@
 echo 'Stopping Tomcat service...'
 sudo systemctl stop tomcat
 sudo rm -f "${tomcat_webapps}/${war_name}.war", ignoreError: true
+echo '${tomcat_webapps}/${war_name}'
 sudo rm -rf "${tomcat_webapps}/${war_name}", ignoreError: true
 
 echo 'Sending war file...'
