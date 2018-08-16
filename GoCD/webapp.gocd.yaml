@@ -59,8 +59,8 @@ pipelines:
     group: Application
     materials:
       repo:
-        git: https://github.com/devops-at06/JR.git
-        branch: master
+        git: https://github.com/JimmyRomero/JR.git
+        branch: task13-last
     stages:
       - Commit:
           jobs:
@@ -122,7 +122,8 @@ pipelines:
                       - deploy.gradle
                       - deploy
                       - -Pdev_server=10.28.109.116
-                      - -Pwar_path=war
+                      - -Pwar_path=war                      
+                      - -Pwar_name=webapp-quickstart
                       - -p
                       - webapp-quickstart
                       
